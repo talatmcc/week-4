@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Welcome to MY model Form</h1>
+    {% comment %} <h1>{{mymodel}}</h1> {% endcomment %}
+    
+    {% if mymodel %}
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Roll</th>
+                <th scope="col">Father</th>
+                <th scope="col">Total Marks</th>
+                <th scope="col">Nationality</th>
+                <th scope="col">Delete</th>
+                {% comment %} <th scope="col">Class duration</th> {% endcomment %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in mymodel %}
+            <tr>
+                <td scope="col">{{ user.name }}</td>
+                <td scope="col">{{ user.roll }}</td>
+                <td scope="col">{{ user.father_name }}</td>
+                <td scope="col">{{ user.total_marks }}</td>
+                <td scope="col">{{ user.nationality }}</td>
+                <td scope="col"><button type="button" class="btn btn-danger">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h1>No data to show</h1>
+    {% endif %}
+{% endblock %}
