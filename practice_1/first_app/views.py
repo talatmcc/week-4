@@ -1,12 +1,17 @@
 from django.shortcuts import render,redirect
 from .forms import contactForm
 from . import models
+from first_app.student_form import StudentForm 
 
 
 
 def index(request):
     Student = models.Student.objects.all()  
     return render(request, "first_app/index.html" , {"data": Student})
+
+def studentFrom(request):
+    std = StudentForm()
+    return render(request, "first_app/student_form.html" , {"StudentForm": std})
 
 def delete_student(request, roll):
     student = models.Student.objects.get( pk = roll)
