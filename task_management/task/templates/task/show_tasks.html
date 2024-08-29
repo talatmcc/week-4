@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    {% for task in data %}
+    <div class="col-md-4">
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ task.taskTitle }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ task.assign_at }}</h6>
+                <p class="card-text">{{ task.taskDescription|truncatewords:30 }}</p>
+                <p class="card-text">
+                    {% for cat in task.categories.all %}
+                    {{ cat.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                {% if task.is_completed %}
+                <p class="text-primary">Completed</p>
+                {% else %}
+                <a href="{% url 'edit_task' task.id %}" class="card-link btn btn-primary btn-sm">Edit</a>
+                <a href="{% url 'delete_task' task.id %}" class="card-link btn btn-warning btn-sm">Delete</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
